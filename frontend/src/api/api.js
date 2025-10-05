@@ -1,9 +1,5 @@
-// To'liq manzilni ko'rsatamiz, bu frontend va backend alohida ishlayotganda eng ishonchli usul
 const API_BASE_URL = 'https://meteor-madness-4yd7.onrender.com/api';
 
-/**
- * Yerga yaqin asteroidlar ro'yxatini oladi.
- */
 export const getNearEarthObjects = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/neos/today`);
@@ -15,9 +11,7 @@ export const getNearEarthObjects = async () => {
   }
 };
 
-/**
- * Berilgan asteroid ID'si bo'yicha uning trayektoriyasini oladi.
- */
+
 export const fetchTrajectory = async (spkId) => {
   try {
     const response = await fetch(`${API_BASE_URL}/asteroid/${spkId}`);
@@ -29,9 +23,7 @@ export const fetchTrajectory = async (spkId) => {
   }
 };
 
-/**
- * Berilgan asteroid ID'si bo'yicha uning zarba oqibatlarini hisoblaydi.
- */
+
 export const fetchImpactEffects = async (spkId) => {
   try {
     const response = await fetch(`${API_BASE_URL}/impact_effects/${spkId}`);
@@ -43,9 +35,7 @@ export const fetchImpactEffects = async (spkId) => {
   }
 };
 
-/**
- * (YANGI) ML modeli yordamida zarba oqibatlarini tezkor bashorat qiladi.
- */
+
 export const predictImpactML = async (spkId) => {
   try {
     const response = await fetch(`${API_BASE_URL}/predict_impact_ml/${spkId}`);
@@ -59,9 +49,6 @@ export const predictImpactML = async (spkId) => {
   }
 };
 
-/**
- * (YANGI) Zarba nuqtasi va krater diametri bo'yicha aholiga ta'sirini oladi.
- */
 export const fetchPopulationImpact = async (latitude, longitude, crater_km) => {
     try {
         const response = await fetch(`${API_BASE_URL}/population_impact`, {
@@ -81,7 +68,6 @@ export const getMissionTarget = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/missions/impactor-2025`);
     if (!response.ok) throw new Error(`Server xatosi: ${response.status}`);
-    // Missiya targetini ro'yxat ko'rinishida qaytaramiz, boshqa komponentlar moslashishi uchun
     return [await response.json()]; 
   } catch (error) {
     console.error("Missiya nishonini yuklashda xatolik:", error);
