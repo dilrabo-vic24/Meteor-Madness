@@ -1,5 +1,5 @@
 // To'liq manzilni ko'rsatamiz, bu frontend va backend alohida ishlayotganda eng ishonchli usul
-const API_BASE_URL = 'http://127.0.0.1:8000/api';
+const API_BASE_URL = 'https://meteor-madness-4yd7.onrender.com';
 
 /**
  * Yerga yaqin asteroidlar ro'yxatini oladi.
