@@ -3,11 +3,11 @@ import sys
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# Backend papkasini path ga qo'shish
+# Path sozlamalari
 sys.path.insert(0, os.path.dirname(__file__))
 
-# Relative import o'rniga absolute import
-from app.api import routers
+# Import - from .api o'rniga app.api
+from app.api import routers  # ← BU O'ZGARDI
 
 app = FastAPI(title="A.R.I.E.S. Backend API")
 
@@ -15,7 +15,7 @@ origins = [
     "http://localhost",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "*"  # Hozircha hamma uchun ochiq
+    "*"
 ]
 
 client_url = os.getenv("FRONTEND_URL")
