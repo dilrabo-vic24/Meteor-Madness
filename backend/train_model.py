@@ -7,7 +7,6 @@ from sklearn.ensemble import RandomForestRegressor
 import joblib
 import os
 
-# 1. Sun'iy ma'lumotlar yaratish
 print("Sun'iy ma'lumotlar yaratilmoqda...")
 data = []
 for _ in range(5000):
@@ -15,7 +14,6 @@ for _ in range(5000):
     velocity_kms = np.random.uniform(11, 72)
     density_kgm3 = np.random.uniform(1500, 7000)
     
-    # physics_service.py dagi formulalardan foydalanamiz
     radius_m = diameter_m / 2
     volume_m3 = (4/3) * np.pi * (radius_m**3)
     mass_kg = volume_m3 * density_kgm3
@@ -29,7 +27,6 @@ for _ in range(5000):
 
 df = pd.DataFrame(data, columns=['diameter_m', 'velocity_kms', 'density_kgm3', 'energy_megatons', 'crater_diameter_km', 'seismic_magnitude_mw'])
 
-# 2. Modelni o'qitish
 X = df[['diameter_m', 'velocity_kms', 'density_kgm3']]
 y = df[['energy_megatons', 'crater_diameter_km', 'seismic_magnitude_mw']]
 
@@ -41,7 +38,6 @@ model.fit(X_train, y_train)
 
 print(f"Model aniqligi (R^2): {model.score(X_test, y_test):.4f}")
 
-# 3. Modelni saqlash
 output_dir = 'backend/app/ml/models'
 os.makedirs(output_dir, exist_ok=True)
 model_path = os.path.join(output_dir, 'impact_predictor.joblib')

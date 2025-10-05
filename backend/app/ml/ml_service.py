@@ -18,13 +18,10 @@ def predict_impact(diameter_m: float, velocity_kms: float, density_kgm3: float =
     """Berilgan parametrlar uchun zarba oqibatlarini bashorat qiladi."""
     model = get_model()
     
-    # Modelga ma'lumotni 2D massiv formatida berish kerak
     input_features = np.array([[diameter_m, velocity_kms, density_kgm3]])
     
-    # Bashorat qilish
     prediction = model.predict(input_features)
     
-    # Natijani formatlash
     predicted_effects = prediction[0]
     return {
         "energy_megatons": round(predicted_effects[0], 2),

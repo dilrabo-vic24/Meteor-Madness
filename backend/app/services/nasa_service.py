@@ -10,7 +10,7 @@ def get_fictional_impactor_data():
         "name": "Impactor-2025 (Fictional Mission Target)",
         "id": "999999",
         "neo_reference_id": "Impactor-2025",
-        "is_potentially_hazardous_asteroid": True, # Missiya uchun muhim
+        "is_potentially_hazardous_asteroid": True, 
         "estimated_diameter": {
             "meters": {
                 "estimated_diameter_min": 140,
@@ -23,11 +23,11 @@ def get_fictional_impactor_data():
                     "kilometers_per_second": "25.5"
                 },
                  "miss_distance": {
-                    "kilometers": "0" # To'g'ridan-to'g'ri zarba
+                    "kilometers": "0"
                 }
             }
         ],
-        "orbital_data": { # Trayektoriya uchun ma'lumotlar
+        "orbital_data": {
             "semi_major_axis": "1.8",
             "eccentricity": "0.55",
             "inclination": "15.0",
@@ -59,7 +59,6 @@ async def get_asteroid_data(spk_id: str):
 async def get_real_near_earth_objects_for_today():
     """FAQAT HAQIQIY ob'ektlarni NASA'dan oladi."""
     if not settings.NASA_API_KEY or settings.NASA_API_KEY == "YOUR_API_KEY_HERE":
-        # Agar API kaliti bo'lmasa, test uchun bo'sh ro'yxat qaytaramiz
         print("OGOHLANTIRISH: NASA_API_KEY sozlanmagan. Haqiqiy asteroidlar yuklanmaydi.")
         return []
 

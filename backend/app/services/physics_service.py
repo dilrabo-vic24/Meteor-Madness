@@ -1,6 +1,5 @@
 import numpy as np
 
-# --- ORBITAL MEXANIKA ---
 def solve_kepler(M, e, tolerance=1e-6):
     E = M
     for _ in range(100):
@@ -10,7 +9,6 @@ def solve_kepler(M, e, tolerance=1e-6):
     return E
 
 def calculate_trajectory_points(orbit_params, num_points=365):
-    # ... (kod o'zgarishsiz, avvalgidek qoladi)
     e = float(orbit_params['eccentricity'])
     a_au = float(orbit_params['semi_major_axis'])
     i_deg, om_deg, w_deg, ma_deg = map(float, [
@@ -44,9 +42,7 @@ def calculate_trajectory_points(orbit_params, num_points=365):
         trajectory_coords.extend([x, y, z])
     return trajectory_coords
 
-# --- ZARBA FIZIKASI ---
 def calculate_impact_physics(asteroid_data):
-    # ... (kod o'zgarishsiz, avvalgidek qoladi)
     diameter_data = asteroid_data['estimated_diameter']['meters']
     if 'estimated_diameter_mean' in diameter_data:
         diameter_m = diameter_data['estimated_diameter_mean']
@@ -67,11 +63,9 @@ def calculate_impact_physics(asteroid_data):
     kinetic_energy_joules = 0.5 * mass_kg * (velocity_ms**2)
     energy_megatons = kinetic_energy_joules / 4.184e15
 
-    # Formulalar soddalashtirilgan, realistik natijalar uchun o'zgartirilishi mumkin
     crater_diameter_m = 1.16 * (density_kgm3 / 2750)**(1/3) * (kinetic_energy_joules)**0.28
     seismic_magnitude_mw = (2/3) * np.log10(kinetic_energy_joules) - 6.07
     
-    # Zarba joylashuvini taxminiy aniqlash (bu yerda soddalashtirilgan)
     impact_latitude = np.random.uniform(-60, 60)
     impact_longitude = np.random.uniform(-180, 180)
     

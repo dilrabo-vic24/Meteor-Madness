@@ -8,32 +8,25 @@ import numpy as np
 
 router = APIRouter()
 
-# --- Pydantic modellari ---
 class PopulationImpactRequest(BaseModel):
     latitude: float
     longitude: float
     crater_km: float
 
-# --- Endpoint'lar ---
-
-# 1. "Asteroid Explorer" sahifasi uchun
 @router.get("/neos/today", tags=["Asteroid Data"])
 async def get_real_today_neos_route():
     """Faqat HAQIQIY Yerga yaqin asteroidlar ro'yxatini qaytaradi."""
     return await nasa_service.get_real_near_earth_objects_for_today()
 
-# 2. "Mission: Impactor-2025" sahifasi uchun
 @router.get("/missions/impactor-2025", tags=["Mission Data"])
 async def get_mission_target_route():
     """Missiya uchun mo'ljallangan yagona, xayoliy "Impactor-2025" asteroidi ma'lumotini qaytaradi."""
     return nasa_service.get_fictional_impactor_data()
 
-# 3. Trayektoriyani olish (ham haqiqiy, ham xayoliy asteroid uchun ishlaydi)
 @router.get("/asteroid/{spk_id}", tags=["Asteroid Data"])
 async def get_trajectory_route(spk_id: str):
     """Berilgan asteroid ID (haqiqiy yoki 'Impactor-2025') bo'yicha trayektoriya nuqtalarini hisoblaydi."""
     try:
-        # get_asteroid_data funksiyasi ikkala holatni ham qo'llab-quvvatlaydi
         asteroid_data = await nasa_service.get_asteroid_data(spk_id)
         orbit_params = asteroid_data['orbital_data']
         trajectory_points = physics_service.calculate_trajectory_points(orbit_params)
@@ -43,7 +36,6 @@ async def get_trajectory_route(spk_id: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# 4. To'liq simulyatsiya (ham haqiqiy, ham xayoliy asteroid uchun ishlaydi)
 @router.get("/impact_effects/{spk_id}", tags=["Simulation"])
 async def get_impact_effects_route(spk_id: str):
     """To'liq fizik hisob-kitoblarga asoslangan zarba oqibatlarini qaytaradi."""
@@ -53,7 +45,6 @@ async def get_impact_effects_route(spk_id: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# 5. AI bashorati (ham haqiqiy, ham xayoliy asteroid uchun ishlaydi)
 @router.get("/predict_impact_ml/{spk_id}", tags=["AI Prediction"])
 async def predict_impact_ml_route(spk_id: str):
     """ML modeli yordamida zarba oqibatlarini tezkor bashorat qiladi."""
@@ -79,7 +70,6 @@ async def predict_impact_ml_route(spk_id: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"ML bashoratida xatolik: {str(e)}")
 
-# 6. Aholiga ta'sirni hisoblash (asteroidga bog'liq emas)
 @router.post("/population_impact", tags=["Regional Analysis"])
 async def get_population_impact_route(request: PopulationImpactRequest):
     """Berilgan koordinatalar va krater o'lchami bo'yicha aholiga ta'sirni hisoblaydi."""

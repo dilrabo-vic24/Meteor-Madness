@@ -1,14 +1,7 @@
-# backend/app/core/config.py
 
 import os
 from dotenv import load_dotenv
 
-# CORRECTED: This path correctly finds the root 'backend' directory
-# and then looks for the .env file inside it.
-# __file__ -> config.py
-# os.path.dirname(__file__) -> core/
-# os.path.dirname(...) -> app/
-# os.path.dirname(...) -> backend/
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 load_dotenv(os.path.join(ROOT_DIR, '.env'))
 
