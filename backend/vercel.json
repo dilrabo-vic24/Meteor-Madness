@@ -1,17 +1,7 @@
 {
   "functions": {
     "api/**/*.py": {
-      "excludeFiles": [
-        "**/numpy/doc/**",
-        "**/numpy/tests/**",
-        "**/scipy/tests/**",
-        "**/pandas/tests/**",
-        "**/sklearn/tests/**",
-        "**/rasterio/tests/**",
-        "**/shapely/tests/**",
-        "**/*.dist-info/**",
-        "**/*.egg-info/**"
-      ]
+      "excludeFiles": "**/numpy/doc/**,**/numpy/tests/**,**/scipy/tests/**,**/pandas/tests/**,**/sklearn/tests/**,**/rasterio/tests/**,**/shapely/tests/**,**/*.dist-info/**,**/*.egg-info/**"
     }
   }
 }
