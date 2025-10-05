@@ -1,6 +1,20 @@
 {
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "main.py"
+    }
+  ],
   "functions": {
-    "api/**/*.py": {
+    "main.py": {
+      "maxDuration": 30,
+      "memory": 1024,
       "excludeFiles": "**/numpy/doc/**,**/numpy/tests/**,**/scipy/tests/**,**/pandas/tests/**,**/sklearn/tests/**,**/rasterio/tests/**,**/shapely/tests/**,**/*.dist-info/**,**/*.egg-info/**"
     }
   }
